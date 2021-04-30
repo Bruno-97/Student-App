@@ -1,0 +1,56 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" asp-controller="Admin" asp-action="Index" style="font-weight:bolder">STUDOMAT</a>
+    </div>
+    <ul class="nav navbar-right top-nav">
+        <li>
+            <a asp-controller="Admin" asp-action="Statistika" data-placement="bottom" data-toggle="tooltip" data-original-title="Statistika">
+                <i class="fa fa-bar-chart-o"></i>
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Korisnički račun <b class="fa fa-angle-down"></b></a>
+            <ul class="dropdown-menu">
+                @*<li><a href="#" asp-controller="Admin" asp-action="EditAdministrator"><i class="fa fa-fw fa-user"></i> Uredi profil </a></li>*@
+                <li><a asp-controller="Admin" asp-action="ChangePassword"><i class="fa fa-fw fa-cog"></i> Promjeni lozinku</a></li>
+                <li class="divider"></li>
+                <li align="center"><partial name="_LoginPartial" /><i class="fa fa-fw fa-power-off"></i></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i> Pretraga studenata <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                <ul id="submenu-1" class="collapse">
+                    <li><a asp-controller="Admin" asp-action="UserList"><i class="fa fa-angle-double-right"></i> Svi studenti</a></li>
+                    <li><a asp-controller="Admin" asp-action="PregledPoFakultetima"><i class="fa fa-angle-double-right"></i> Po fakultetima</a></li>
+                    <li><a asp-controller="Admin" asp-action="PregledPoMjestima"><i class="fa fa-angle-double-right"></i> Po mjestima</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-university"></i> Pretraga fakulteta <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                <ul id="submenu-2" class="collapse">
+                    <li><a asp-controller="Admin" asp-action="ListaFakulteta"><i class="fa fa-angle-double-right"></i> Popis fakulteta</a></li>
+                    @*<li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 2.2</a></li>
+                    <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 2.3</a></li>*@
+                </ul>
+            </li>
+            <li>
+                <a asp-area="identity" asp-page="/Account/Register"><i class="fa fa-fw fa-user-plus"></i>  Dodaj studenta</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Delete"><i class="fa fa-trash"></i> Obriši studenta</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="About"><i class="fa fa-fw fa fa-question-circle"></i> O aplikaciji / Pomoć</a>
+            </li>
+        </ul>
+    </div>
+</nav>

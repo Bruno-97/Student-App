@@ -1,0 +1,153 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Moje ocjene";
+}
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .button {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+            border-radius: 3px;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        tr:hover td {
+            background-color: #ebebeb;
+            color: black;
+        }
+    </style>
+</head>
+
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <partial name="_navigacijaDVA" />
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main">
+                <div class="col-sm-12 col-md-12 well" id="content" style="padding-top:0px;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4><kbd>Dosad upisani kolegiji:</kbd></h4>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>KOLEGIJ</th>
+                                        <th>OCJENA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Ocjenes.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @(i+1)
+                                            </td>
+                                            <td>
+                                                @Model?.Ocjenes[i].Kolegij?.Naziv
+                                            </td>
+                                            <td style="color: crimson">
+                                                @Model?.Ocjenes[i].Ocjena
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <br />
+                            <canvas id="myChart1" style="max-width: 400px;"></canvas>
+                            <br />
+                           
+                            @if (ViewBag.brojNegativnih != 0)
+                            {
+                                <div>
+                                    Broj negativnih ocjena: <span style="color:red;">@ViewBag.brojNegativnih</span>
+                                </div>
+                            }
+
+                        <script language="javascript" type="text/javascript">
+                    var ctx = document.getElementById("myChart1").getContext('2d');
+                    ctx.canvas.width = 400;
+                    ctx.canvas.height = 600;
+                        var myChart1 = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["Ja", "Generacija"],
+                                datasets: [{
+                                    label: 'Prosjek',
+                                    data: [@ViewBag.prosjekOcjena, @ViewBag.prosjekOcjenaGeneracije],
+                                    backgroundColor: [
+                                        'rgba(0, 123, 255, 1)',
+                                        'rgba(179, 179, 0, 1)'
+                                    ],
+                                    borderWidth: 1,
+                                    hoverBorderWidth: 3,
+                                    hoverBorderColor: '#000',
+                                    borderColor: '#777'
+                                }]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'PROSJEK OCJENA',
+                                    fontSize: 25
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            suggestedMin: 1,
+                                            suggestedMax: 5
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        })
+
+    </script>
+}
+

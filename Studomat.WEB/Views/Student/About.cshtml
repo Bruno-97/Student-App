@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "O aplikaciji";
+
+    var mail = "bpripeljas@gmail.com";
+}
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <style>
+        .button {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+            border-radius: 3px;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+
+        a:link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <partial name="_navigacijaDVA" />
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main">
+                @*Prvi div*@
+                <div class="col-sm-12 col-md-12 well" id="content" style="padding-top:0px;">
+                    <h1 style="font-weight: bold">O studomatu</h1>
+                    <div>
+                        Ova aplikacija napravljena je kao projekt završnog rada. Autor je Bruno Pripeljaš, student Tehničkog Veleučilišta u Zagrebu, 2020. godine.
+                    </div>
+                    <div>
+                        <br />
+                        Za ostale informacije i pitanja <i class="fa fa-envelope-o" aria-hidden="true"></i> : <a class="button" href="mailto:@mail">Pošaljite e-mail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        })
+
+    </script>
+}
+

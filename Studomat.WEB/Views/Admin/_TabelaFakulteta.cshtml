@@ -1,0 +1,176 @@
+﻿@model List<Fakultet>
+
+    <div class="col-sm-12 col-md-12 well" id="tabelaFakulteta" style="padding:30px;">
+        <div style="margin-top: 0px;">
+            <partial name="_UniversityFilter" model="new UniversityFilterModel()" />
+        </div>
+        <br />
+        <div style="border-bottom: 3px solid black; padding-bottom:30px;"></div>
+        @foreach (var fakultet in Model)
+        {
+            <div class="row user-row">
+                <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+                    <i class="glyphicon glyphicon-education" style="font-size: 50px;"></i>
+                </div>
+                <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                    <strong class="text-uppercase">@fakultet.Naziv</strong><br>
+                    <span class="text-muted"># @fakultet.ID</span>
+                </div>
+                <div class="dropdown-user" data-for=".@fakultet.ID">
+                    <i class="glyphicon glyphicon-arrow-down text-muted"></i>
+                </div>
+            </div>
+            <div class="row user-infos @fakultet.ID">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+                    <div class="panel panel-primary" style="border: 2px solid rgb(34, 34, 34);">
+                        <div class="panel-heading" style="background-color:rgb(34, 34, 34); border: 2px solid rgb(34, 34, 34);">
+                            <h3 class="panel-title">Podaci fakulteta</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class=" col-md-9 col-lg-9">
+                                    <h4 style="font-weight:bold; color: #007bff">@fakultet.Naziv</h4><br>
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Grad:</td>
+                                                <td>@fakultet.Mjesto?.NazivMjesta</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adresa:</td>
+                                                <td>@fakultet.Adresa</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Godina osnutka:</td>
+                                                <td>@fakultet.GodinaOsnutka.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Broj upisanih studenata:</td>
+                                                @if (fakultet.AppUsers.Count > 0)
+                                                {
+                                                    <td>@fakultet.AppUsers.Count</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Trenutno nema upisanih studenata</td>
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            @*<div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Popis kolegija na fakultetu</h3>
+                                                </div>*@
+                                            <h4 style="color:crimson">Neki od kolegija na fakultetu:</h4>
+                                                <table class="table table-hover" id="dev-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>KOLEGIJ</th>
+                                                            <th>NASTAVNIK</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @for(int i = 0; i < fakultet.Kolegiji.Count; i++)
+                                                        {
+                                                        <tr>
+                                                            <td>
+                                                                @(i+1)
+                                                            </td>
+                                                            <td>
+                                                                @fakultet.Kolegiji[i].Naziv
+                                                            </td>
+                                                            @if (@fakultet.Kolegiji[i].Nastavnik?.Ime != null)
+                                                            {
+                                                                <td>
+                                                                    @fakultet.Kolegiji[i].Nastavnik?.Ime @fakultet.Kolegiji[i].Nastavnik?.Prezime, <span style="font-style: italic">@fakultet.Kolegiji[i].Nastavnik?.TitulaIspred</span>
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                               <td>
+                                                                   -
+                                                               </td>
+                                                            }
+                                                        </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            @*</div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="mailto:@fakultet.Email" class="button1"
+                               data-toggle="tooltip"
+                               data-original-title="Pošaljite e-mail">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </a>
+                            <span class="pull-right">
+                                <a asp-action="PregledPojedinogFakulteta" asp-route-id="@fakultet.ID" class="button2"
+                                   data-toggle="tooltip"
+                                   data-original-title="Upisani studenti">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom: 3px solid black"></div>
+        }
+    </div>
+
+<script>
+    $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+
+            var panels = $('.user-infos');
+            var panelsButton = $('.dropdown-user');
+            panels.hide();
+
+            //Click dropdown
+            panelsButton.click(function () {
+                //get data-for attribute
+                var dataFor = $(this).attr('data-for');
+                var idFor = $(dataFor);
+
+                //current button
+                var currentButton = $(this);
+                idFor.slideToggle(400, function () {
+                    //Completed slidetoggle
+                    if (idFor.is(':visible')) {
+                        currentButton.html('<i class="glyphicon glyphicon-arrow-up text-muted"></i>');
+                    }
+                    else {
+                        currentButton.html('<i class="glyphicon glyphicon-arrow-down text-muted"></i>');
+                    }
+                })
+            });
+        })
+        function performFilter()
+        {
+            var values = $("#forma").serialize();
+
+            $.ajax(
+                {
+                    url: "@Url.Action("ListaFakultetaFilter", "Admin")",
+                    method: "POST",
+                    data: values,
+                    success: function (html)
+                    {
+                        $("#tabelaFakulteta").replaceWith(html);
+                    }
+                });
+        }
+</script>

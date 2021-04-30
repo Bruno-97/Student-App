@@ -1,0 +1,9 @@
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\bin\Debug\netcoreapp2.1\Studomat.MODEL.deps.json
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\bin\Debug\netcoreapp2.1\Studomat.MODEL.dll
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\bin\Debug\netcoreapp2.1\Studomat.MODEL.pdb
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.AssemblyInfoInputs.cache
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.AssemblyInfo.cs
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.dll
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.pdb
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.csproj.CoreCompileInputs.cache
+C:\Users\Bruno\source\repos\Studomat\Studomat.MODEL\obj\Debug\netcoreapp2.1\Studomat.MODEL.csprojAssemblyReference.cache

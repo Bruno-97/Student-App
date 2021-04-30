@@ -1,0 +1,573 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Lista studenata";
+}
+    <head>
+
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <style>
+            /********************************** PRVI DIO ***************************************/
+            @@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+            @@media(min-width:768px) {
+                body {
+                    margin-top: 40px;
+                }
+            }
+
+            @@media(max-width:768px) {
+                #page-wrapper {
+                    margin-top: 130px;
+                    width: 100%;
+                    padding: 0;
+                    background-color: #fff;
+                }
+            }
+
+            #wrapper {
+                padding-left: 0;
+            }
+
+            #page-wrapper {
+                width: 100%;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            @@media(min-width:768px) {
+                #wrapper {
+                    padding-left: 225px;
+                }
+
+                #page-wrapper {
+                    padding: 22px 10px;
+                }
+            }
+
+            .top-nav {
+                padding: 0 15px;
+            }
+
+                .top-nav > li {
+                    display: inline-block;
+                    float: left;
+                }
+
+                    .top-nav > li > a {
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                        line-height: 20px;
+                        color: #fff;
+                    }
+
+                        .top-nav > li > a:hover,
+                        .top-nav > li > a:focus,
+                        .top-nav > .open > a,
+                        .top-nav > .open > a:hover,
+                        .top-nav > .open > a:focus {
+                            color: #fff;
+                            background-color: #09364a;
+                        }
+
+                .top-nav > .open > .dropdown-menu {
+                    float: left;
+                    position: absolute;
+                    margin-top: 0;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    background-color: #fff;
+                    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                }
+
+                    .top-nav > .open > .dropdown-menu > li > a {
+                        white-space: normal;
+                    }
+
+
+            @@media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 60px;
+                    left: 225px;
+                    width: 225px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    border-top: 1px rgba(0,0,0,.5) solid;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
+
+                    .side-nav > li > a {
+                        width: 225px;
+                        border-bottom: 1px rgba(0,0,0,.3) solid;
+                    }
+
+                    .side-nav li a:hover,
+                    .side-nav li a:focus {
+                        outline: none;
+                        background-color: #09364a !important;
+                    }
+            }
+
+            .side-nav > li > ul {
+                padding: 0;
+                border-bottom: 1px rgba(0,0,0,.3) solid;
+            }
+
+                .side-nav > li > ul > li > a {
+                    display: block;
+                    padding: 10px 15px 10px 38px;
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                    .side-nav > li > ul > li > a:hover {
+                        color: #fff;
+                    }
+
+            .navbar .nav > li > a > .label {
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                position: absolute;
+                top: 14px;
+                right: 6px;
+                font-size: 10px;
+                font-weight: normal;
+                min-width: 15px;
+                min-height: 15px;
+                line-height: 1.0em;
+                text-align: center;
+                padding: 2px;
+            }
+
+            .navbar .nav > li > a:hover > .label {
+                top: 10px;
+            }
+
+            .navbar-brand {
+                padding-top: 20px;
+            }
+
+            /********************************** DRUGI DIO ***************************************/
+
+            body {
+                /*margin-top: 70px;*/
+            }
+
+            /* USER LIST TABLE */
+            .user-list tbody td > img {
+                position: relative;
+                max-width: 50px;
+                float: left;
+                margin-right: 15px;
+            }
+
+            .user-list tbody td .user-link {
+                display: block;
+                font-size: 1.25em;
+                padding-top: 3px;
+                margin-left: 0px;
+            }
+
+            .user-list tbody td .user-subhead {
+                font-size: 0.875em;
+                font-style: italic;
+            }
+
+            /* TABLES */
+            .table {
+                border-collapse: separate;
+            }
+
+            .table-hover > tbody > tr:hover > td,
+            .table-hover > tbody > tr:hover > th {
+                background-color: #eee;
+            }
+
+            .table thead > tr > th {
+                border-bottom: 1px solid #C2C2C2;
+                padding-bottom: 0;
+            }
+
+            .table tbody > tr > td {
+                font-size: 0.875em;
+                background: #f5f5f5;
+                border-top: 10px solid #fff;
+                vertical-align: middle;
+                padding: 12px 8px;
+            }
+
+                .table tbody > tr > td:first-child,
+                .table thead > tr > th:first-child {
+                    padding-left: 20px;
+                }
+
+            .table thead > tr > th span {
+                border-bottom: 2px solid #C2C2C2;
+                display: inline-block;
+                padding: 0 5px;
+                padding-bottom: 5px;
+                font-weight: normal;
+            }
+
+            .table thead > tr > th > a span {
+                color: #344644;
+            }
+
+                .table thead > tr > th > a span:after {
+                    content: "\f0dc";
+                    font-family: FontAwesome;
+                    font-style: normal;
+                    font-weight: normal;
+                    text-decoration: inherit;
+                    margin-left: 5px;
+                    font-size: 0.75em;
+                }
+
+            .table thead > tr > th > a.asc span:after {
+                content: "\f0dd";
+            }
+
+            .table thead > tr > th > a.desc span:after {
+                content: "\f0de";
+            }
+
+            .table thead > tr > th > a:hover span {
+                text-decoration: none;
+                color: #2bb6a3;
+                border-color: #2bb6a3;
+            }
+
+            .table.table-hover tbody > tr > td {
+                -webkit-transition: background-color 0.15s ease-in-out 0s;
+                transition: background-color 0.15s ease-in-out 0s;
+            }
+
+            .table tbody tr td .call-type {
+                display: block;
+                font-size: 0.75em;
+                text-align: center;
+            }
+
+            .table tbody tr td .first-line {
+                line-height: 1.5;
+                font-weight: 400;
+                font-size: 1.125em;
+            }
+
+                .table tbody tr td .first-line span {
+                    font-size: 0.875em;
+                    color: #969696;
+                    font-weight: 300;
+                }
+
+            .table tbody tr td .second-line {
+                font-size: 0.875em;
+                line-height: 1.2;
+            }
+
+            .table a.table-link {
+                margin: 0 5px;
+                font-size: 1.125em;
+            }
+
+                .table a.table-link:hover {
+                    text-decoration: none;
+                    color: #2aa493;
+                }
+
+                .table a.table-link.danger {
+                    color: #fe635f;
+                }
+
+                    .table a.table-link.danger:hover {
+                        color: #dd504c;
+                    }
+
+            .table-products tbody > tr > td {
+                background: none;
+                border: none;
+                border-bottom: 1px solid #ebebeb;
+                -webkit-transition: background-color 0.15s ease-in-out 0s;
+                transition: background-color 0.15s ease-in-out 0s;
+                position: relative;
+            }
+
+            .table-products tbody > tr:hover > td {
+                text-decoration: none;
+                background-color: #f6f6f6;
+            }
+
+            .table-products .name {
+                display: block;
+                font-weight: 600;
+                padding-bottom: 7px;
+            }
+
+            .table-products .price {
+                display: block;
+                text-decoration: none;
+                width: 50%;
+                float: left;
+                font-size: 0.875em;
+            }
+
+                .table-products .price > i {
+                    color: #8dc859;
+                }
+
+            .table-products .warranty {
+                display: block;
+                text-decoration: none;
+                width: 50%;
+                float: left;
+                font-size: 0.875em;
+            }
+
+                .table-products .warranty > i {
+                    color: #f1c40f;
+                }
+
+            .table tbody > tr.table-line-fb > td {
+                background-color: #9daccb;
+                color: #262525;
+            }
+
+            .table tbody > tr.table-line-twitter > td {
+                background-color: #9fccff;
+                color: #262525;
+            }
+
+            .table tbody > tr.table-line-plus > td {
+                background-color: #eea59c;
+                color: #262525;
+            }
+
+            .table-stats .status-social-icon {
+                font-size: 1.9em;
+                vertical-align: bottom;
+            }
+
+            .table-stats .table-line-fb .status-social-icon {
+                color: #556484;
+            }
+
+            .table-stats .table-line-twitter .status-social-icon {
+                color: #5885b8;
+            }
+
+            .table-stats .table-line-plus .status-social-icon {
+                color: #a75d54;
+            }
+
+            #nekiID1 {
+                background-color: white;
+                color: black;
+                border: 2px solid #28a745;
+                border-radius: 3px;
+                padding: 4px 8px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                #nekiID1:hover {
+                    background-color: #28a745;
+                    color: white;
+                }
+
+            #nekiID2 {
+                background-color: white;
+                color: black;
+                border: 2px solid #dc3545;
+                border-radius: 3px;
+                padding: 4px 8px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                #nekiID2:hover {
+                    background-color: #dc3545;
+                    color: white;
+                }
+
+            #nekiID3 {
+                background-color: white;
+                color: black;
+                border: 2px solid #007bff;
+                border-radius: 3px;
+                padding: 4px 8px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+                /*#8041f7 -> ljubičasta*/
+                #nekiID3:hover {
+                    background-color: #007bff;
+                    color: white;
+                }
+
+            #nekiID4 {
+                background-color: white;
+                color: black;
+                border: 2px solid #ffc107;
+                border-radius: 3px;
+                padding: 4px 8px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                #nekiID4:hover {
+                    background-color: #ffc107;
+                    color: black;
+                }
+
+            a:link {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+
+<div id="throbber" style="display: none; min-height: 120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <partial name="_navigacija" />
+    <div id="page-wrapper">
+        <div class="container-fluid" style="margin-top: 10px;">
+            <div class="row" id="main">
+                @*Prvi div*@
+                <div class="col-sm-12 col-md-12 well" id="content" style="padding-top:0px;">
+                    <h2 style="font-weight:bold">Popis studenata</h2>
+                    <div>
+                        @Html.ActionLink("Sortiraj po prezimenu", "UserList", new { sortBy = ViewBag.SortNameParameter }, new { id = "nekiID1" })
+                        @Html.ActionLink("Sortiraj po JMBAGU", "UserList", new { sortBy = ViewBag.SortJMBAGParameter }, new { id = "nekiID2" })
+                        @Html.ActionLink("Prikaži samo redovne", "UserList", new { sortBy = ViewBag.SortRedovniParameter }, new { id = "nekiID3" })
+                        @Html.ActionLink("Prikaži samo izvanredne", "UserList", new { sortBy = ViewBag.SortIzvanredniParameter }, new { id = "nekiID4" })
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                    <th><span>Student</span></th>
+                                    <th><span>JMBAG</span></th>
+                                    <th class="text-center"><span>Status</span></th>
+                                    <th><span>E-mail</span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+                                    if (user.Id != "dc014294-7c49-4e07-bce8-1aa798eb8368")
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@user.Id" style="font-weight:bold;">@user.PunoIme</a>
+                                            </td>
+                                            <td>
+                                                @user.JMBAG
+                                            </td>
+
+                                            @if (user.Status == "REDOVNI")
+                                            {
+                                                <td class="text-center">
+                                                    <span class="label label-primary">Redovni</span>
+                                                </td>
+                                            }
+                                            @if (user.Status == "IZVANREDNI")
+                                            {
+                                                <td class="text-center">
+                                                    <span class="label label-warning">Izvanredni</span>
+                                                </td>
+                                            }
+                                            @if (user.Status != "IZVANREDNI" && user.Status != "REDOVNI")
+                                            {
+                                                <td class="text-center">
+                                                    <span class="label label-default">Potrebno unijeti</span>
+                                                </td>
+                                            }
+                                            <td>
+                                                @user.Email
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <a asp-action="Details" asp-route-id="@user.Id" class="table-link" data-placement="top" data-toggle="tooltip" data-original-title="Detalji">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a asp-action="EditUser" asp-route-id="@user.Id" class="table-link" data-placement="top" data-toggle="tooltip" data-original-title="Uredi">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a asp-action="DeleteUser" asp-route-id="@user.Id" class="table-link danger" data-placement="top" data-toggle="tooltip" data-original-title="Obriši">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<ul class="pagination pull-right">
+       <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+       <li><a href="#">1</a></li>
+       <li><a href="#">2</a></li>
+       <li><a href="#">3</a></li>
+       <li><a href="#">4</a></li>
+       <li><a href="#">5</a></li>
+       <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+    </ul>*@
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        })
+    </script>
+}

@@ -1,0 +1,319 @@
+﻿@model List<Fakultet>
+@{
+    ViewData["Title"] = "Lista fakulteta";
+}
+    <head>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        @*<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>*@
+        <style>
+            /********************************** PRVI DIO ***************************************/
+            @@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+            @@media(min-width:768px) {
+                body {
+                    margin-top: 10px;
+                }
+            }
+
+            @@media(max-width:768px) {
+                #page-wrapper {
+                    margin-top: 90px;
+                    width: 100%;
+                    padding: 0;
+                    background-color: #fff;
+                }
+            }
+
+            #wrapper {
+                padding-left: 0;
+            }
+
+            #page-wrapper {
+                width: 100%;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            @@media(min-width:768px) {
+                #wrapper {
+                    padding-left: 225px;
+                }
+
+                #page-wrapper {
+                    padding: 22px 10px;
+                }
+            }
+
+            .top-nav {
+                padding: 0 15px;
+            }
+
+                .top-nav > li {
+                    display: inline-block;
+                    float: left;
+                }
+
+                    .top-nav > li > a {
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                        line-height: 20px;
+                        color: #fff;
+                    }
+
+                        .top-nav > li > a:hover,
+                        .top-nav > li > a:focus,
+                        .top-nav > .open > a,
+                        .top-nav > .open > a:hover,
+                        .top-nav > .open > a:focus {
+                            color: #fff;
+                            background-color: #09364a;
+                        }
+
+                .top-nav > .open > .dropdown-menu {
+                    float: left;
+                    position: absolute;
+                    margin-top: 0;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    background-color: #fff;
+                    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                }
+
+                    .top-nav > .open > .dropdown-menu > li > a {
+                        white-space: normal;
+                    }
+
+
+            @@media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 60px;
+                    left: 225px;
+                    width: 225px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    border-top: 1px rgba(0,0,0,.5) solid;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
+
+                    .side-nav > li > a {
+                        width: 225px;
+                        border-bottom: 1px rgba(0,0,0,.3) solid;
+                    }
+
+                    .side-nav li a:hover,
+                    .side-nav li a:focus {
+                        outline: none;
+                        background-color: #09364a !important;
+                    }
+            }
+
+            .side-nav > li > ul {
+                padding: 0;
+                border-bottom: 1px rgba(0,0,0,.3) solid;
+            }
+
+                .side-nav > li > ul > li > a {
+                    display: block;
+                    padding: 10px 15px 10px 38px;
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                    .side-nav > li > ul > li > a:hover {
+                        color: #fff;
+                    }
+
+            .navbar .nav > li > a > .label {
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                position: absolute;
+                top: 14px;
+                right: 6px;
+                font-size: 10px;
+                font-weight: normal;
+                min-width: 15px;
+                min-height: 15px;
+                line-height: 1.0em;
+                text-align: center;
+                padding: 2px;
+            }
+
+            .navbar .nav > li > a:hover > .label {
+                top: 10px;
+            }
+
+            .navbar-brand {
+                padding-top: 20px;
+            }
+
+            /********************************** DRUGI DIO ***************************************/
+
+
+            .user-row {
+                margin-bottom: 14px;
+            }
+
+                .user-row:last-child {
+                    margin-bottom: 0;
+                }
+
+            .dropdown-user {
+                font-size: 30px;
+                margin: 13px 0;
+                padding: 5px;
+                height: 100%;
+            }
+
+                .dropdown-user:hover {
+                    cursor: pointer;
+                }
+
+            .table-user-information > tbody > tr {
+                border-top: 1px solid rgb(221, 221, 221);
+            }
+
+                .table-user-information > tbody > tr:first-child {
+                    border-top: 0;
+                }
+
+
+                .table-user-information > tbody > tr > td {
+                    border-top: 0;
+                }
+
+            glyphicon {
+                font-size: 40px;
+            }
+
+            .button1 {
+                background-color: white;
+                color: black;
+                border: 2px solid #28a745;
+                border-radius: 10px;
+                padding: 8px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                .button1:hover {
+                    background-color: #28a745;
+                    color: white;
+                }
+
+            .button2 {
+                background-color: white;
+                color: black;
+                border: 2px solid #fb7816;
+                border-radius: 10px;
+                padding: 8px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                .button2:hover {
+                    background-color: #fb7816;
+                    color: white;
+                }
+
+            a:link {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+
+<div id="throbber" style="display: none; min-height: 120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <partial name="_navigacija" />
+    <div id="page-wrapper">
+        <br><br>
+        <div class="container-fluid">
+            <div class="row" id="main">
+                <partial name="_TabelaFakulteta" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<ul class="pagination pull-right">
+       <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+       <li><a href="#">1</a></li>
+       <li><a href="#">2</a></li>
+       <li><a href="#">3</a></li>
+       <li><a href="#">4</a></li>
+       <li><a href="#">5</a></li>
+       <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+    </ul>*@
+
+@*@section Scripts
+    {
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+
+            var panels = $('.user-infos');
+            var panelsButton = $('.dropdown-user');
+            panels.hide();
+
+            //Click dropdown
+            panelsButton.click(function () {
+                //get data-for attribute
+                var dataFor = $(this).attr('data-for');
+                var idFor = $(dataFor);
+
+                //current button
+                var currentButton = $(this);
+                idFor.slideToggle(400, function () {
+                    //Completed slidetoggle
+                    if (idFor.is(':visible')) {
+                        currentButton.html('<i class="glyphicon glyphicon-arrow-up text-muted"></i>');
+                    }
+                    else {
+                        currentButton.html('<i class="glyphicon glyphicon-arrow-down text-muted"></i>');
+                    }
+                })
+            });
+        })
+        function performFilter()
+        {
+            var values = $("#forma").serialize();
+
+            $.ajax(
+                {
+                    url: "@Url.Action("ListaFakultetaFilter", "Admin")",
+                    method: "POST",
+                    data: values,
+                    success: function (html)
+                    {
+                        $("#tabelaFakulteta").replaceWith(html);
+                    }
+                });
+        }
+    </script>
+}*@

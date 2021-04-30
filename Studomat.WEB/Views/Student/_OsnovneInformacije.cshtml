@@ -1,0 +1,15 @@
+﻿@model AppUser 
+
+<style>
+    #info
+    {
+        background-color: #949a9f;
+        border-radius: 3px;
+    }
+</style>
+
+<div id="info" style="font-size:15px;">
+    <span style="color:black; font-weight:bolder;">@Model.Ime @Model.Prezime</span><br />
+    - @Model.JMBAG <br /><br />
+    <span style="font-style: italic;color: #09364a">@Model.Fakultet?.Naziv</span>
+</div>

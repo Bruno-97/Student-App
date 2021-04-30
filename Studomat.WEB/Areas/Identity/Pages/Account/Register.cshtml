@@ -1,0 +1,243 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Dodavanje studenta";
+}
+
+    <head>
+        @*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>*@
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+        <style>
+            @@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+            @@media(min-width:768px) {
+                body {
+                    margin-top: 50px;
+                }
+            }
+
+            @@media(max-width:768px) {
+                #page-wrapper {
+                    margin-top: 130px;
+                    width: 100%;
+                    padding: 0;
+                    background-color: #fff;
+                }
+            }
+
+            #wrapper {
+                padding-left: 0;
+            }
+
+            #page-wrapper {
+                width: 100%;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            @@media(min-width:768px) {
+                #wrapper {
+                    padding-left: 225px;
+                }
+
+                #page-wrapper {
+                    padding: 22px 10px;
+                }
+            }
+
+            .top-nav {
+                padding: 0 15px;
+            }
+
+                .top-nav > li {
+                    display: inline-block;
+                    float: left;
+                }
+
+                    .top-nav > li > a {
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                        line-height: 20px;
+                        color: #fff;
+                    }
+
+                        .top-nav > li > a:hover,
+                        .top-nav > li > a:focus,
+                        .top-nav > .open > a,
+                        .top-nav > .open > a:hover,
+                        .top-nav > .open > a:focus {
+                            color: #fff;
+                            background-color: #09364a;
+                        }
+
+                .top-nav > .open > .dropdown-menu {
+                    float: left;
+                    position: absolute;
+                    margin-top: 0;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    background-color: #fff;
+                    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                }
+
+                    .top-nav > .open > .dropdown-menu > li > a {
+                        white-space: normal;
+                    }
+
+
+            @@media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 60px;
+                    left: 225px;
+                    width: 225px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    border-top: 1px rgba(0,0,0,.5) solid;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
+
+                    .side-nav > li > a {
+                        width: 225px;
+                        border-bottom: 1px rgba(0,0,0,.3) solid;
+                    }
+
+                    .side-nav li a:hover,
+                    .side-nav li a:focus {
+                        outline: none;
+                        background-color: #09364a !important;
+                    }
+            }
+
+            .side-nav > li > ul {
+                padding: 0;
+                border-bottom: 1px rgba(0,0,0,.3) solid;
+            }
+
+                .side-nav > li > ul > li > a {
+                    display: block;
+                    padding: 10px 15px 10px 38px;
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+                    .side-nav > li > ul > li > a:hover {
+                        color: #fff;
+                    }
+
+            .navbar .nav > li > a > .label {
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                position: absolute;
+                top: 14px;
+                right: 6px;
+                font-size: 10px;
+                font-weight: normal;
+                min-width: 15px;
+                min-height: 15px;
+                line-height: 1.0em;
+                text-align: center;
+                padding: 2px;
+            }
+
+            .navbar .nav > li > a:hover > .label {
+                top: 10px;
+            }
+
+            .navbar-brand {
+                padding-top: 20px;
+            }
+
+            .button {
+                background-color: white;
+                color: black;
+                border: 2px solid #28a745;
+                border-radius: 3px;
+                padding: 8px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+                .button:hover {
+                    background-color: #28a745;
+                    color: white;
+                }
+        </style>
+    </head>
+
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <partial name="_navigacija" />
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main">
+                <div class="col-sm-12 col-md-12 well" id="content">
+                    @*<div class="panel panel-default">
+                        <div class="panel-body">*@
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h3>DODAVANJE NOVOG STUDENTA</h3>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email">E-mail</label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password">Lozinka</label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword">Potvrdi lozinku</label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.OIB"></label>
+                            <input asp-for="Input.OIB" class="form-control" />
+                            <span asp-validation-for="Input.OIB" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.JMBAG"></label>
+                            <input asp-for="Input.JMBAG" class="form-control" />
+                            <span asp-validation-for="Input.JMBAG" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Ime">Ime</label>
+                            <input asp-for="Input.Ime" class="form-control" />
+                            <span asp-validation-for="Input.Ime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Prezime">Prezime</label>
+                            <input asp-for="Input.Prezime" class="form-control" />
+                            <span asp-validation-for="Input.Prezime" class="text-danger"></span>
+                        </div>
+                        <button class="button">DODAJ</button>
+                    </form>
+                        @*</div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

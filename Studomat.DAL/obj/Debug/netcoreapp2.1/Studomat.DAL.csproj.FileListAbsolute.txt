@@ -1,0 +1,15 @@
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.MODEL.dll
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.csprojAssemblyReference.cache
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.AssemblyInfoInputs.cache
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.AssemblyInfo.cs
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.DAL.deps.json
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.DAL.dll
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.DAL.pdb
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.MODEL.pdb
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.csproj.CopyComplete
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.dll
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.pdb
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.DAL.runtimeconfig.json
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\bin\Debug\netcoreapp2.1\Studomat.DAL.runtimeconfig.dev.json
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.genruntimeconfig.cache
+C:\Users\Bruno\source\repos\Studomat\Studomat.DAL\obj\Debug\netcoreapp2.1\Studomat.DAL.csproj.CoreCompileInputs.cache
